@@ -3,6 +3,7 @@ package infrastructure
 import (
 	"fmt"
 	"homeVision/application"
+	"io/ioutil"
 	"log"
 	"sync"
 )
@@ -14,6 +15,7 @@ const (
 
 func HomeVision () {
 	imagesInfo := make(chan []application.ImageInfo, int(pages))
+	var imagesExpected int
 
 	for i := uint8(1); i <= pages; i++ {
 		var api string = fmt.Sprintf(API, i)
@@ -23,7 +25,9 @@ func HomeVision () {
 	var wg1 sync.WaitGroup
 	var counter int = 1
 	for images := range imagesInfo {
-		wg1.Add(len(images))
+		var lenImages int = len(images)
+		imagesExpected += lenImages
+		wg1.Add(lenImages)
 		if counter == int(pages) {
 			close(imagesInfo)
 		}
@@ -37,4 +41,7 @@ func HomeVision () {
 	log.Println("Almost Done!")
 	wg1.Wait()
 	log.Println("Done!")
+	fmt.Println("--------------------")
+	files, _ := ioutil.ReadDir(application.Folder)
+	log.Printf("images expected '%d' but got '%d'", imagesExpected, len(files))
 }
