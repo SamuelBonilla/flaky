@@ -43,5 +43,5 @@ func HomeVision () {
 	log.Println("Done!")
 	fmt.Println("--------------------")
 	files, _ := ioutil.ReadDir(application.Folder)
-	log.Printf("images expected '%d' but got '%d'", imagesExpected, len(files))
+	log.Printf("images expected '%d' got '%d'", imagesExpected, len(files))
 }
