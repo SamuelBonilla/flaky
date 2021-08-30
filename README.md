@@ -1,7 +1,5 @@
 # Flaky API: Dealing with errors when fetching data
 
-This is a take-home interview for HomeVision that focuses primarily on writing clean code that accomplishes a very practical task.
-
 We have a simple pagianted API hosted at [http://app-homevision-staging.herokuapp.com/api_project/houses?page=1](http://app-homevision-staging.herokuapp.com/api_project/houses?page=1) that returns a list of houses along with some metadata. The task will be to write a script that accomplishes the following tasks:
 
 1. Requests the first 10 pages of results from the API
